@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Financial Advisor Platform</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <i class="fas fa-chart-line"></i> FinanceAdvisor
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showPage('home')">Home</a></li>
+                <li><a href="#" onclick="showPage('advisors')">Find Advisors</a></li>
+                <li><a href="#" onclick="showPage('resources')">Resources</a></li>
+                <li><a href="#" onclick="showPage('about')">About</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="#" class="btn btn-secondary" onclick="showPage('login')">Login</a>
+                <a href="#" class="btn btn-primary" onclick="showPage('signup')">Sign Up</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Homepage -->
+        <div id="home" class="page active">
+            <section class="hero">
+                <div class="container">
+                    <h1>Your Financial Future Starts Here</h1>
+                    <p>Connect with certified financial advisors, manage your money wisely, and build wealth for tomorrow</p>
+                  <div class="hero-buttons">
+    <a href="#" class="btn btn-primary" onclick="showSignup('client')">Join as Client</a>
+    <a href="#" class="btn btn-primary" onclick="showSignup('advisor')">Join as Advisor</a>
+</div>
+
+
+                </div>
+            </section>
+
+            
+
+            <section class="features">
+                <div class="container">
+                    <h2 class="text-center">Why Choose Our Platform?</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-user-tie"></i>
+                            <h3>Certified Advisors</h3>
+                            <p>Connect with qualified financial professionals who understand your needs and goals.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-shield-alt"></i>
+                            <h3>Secure Platform</h3>
+                            <p>Your financial data is protected with bank-level security and encryption.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-chart-bar"></i>
+                            <h3>Smart Analytics</h3>
+                            <p>Track your progress with detailed insights and personalized recommendations.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h3>Communication</h3>
+                            <p>Explain financial products in simple non technical terms.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h3>Financial Education</h3>
+                            <p>Learn with our comprehensive library of financial literacy resources.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-dollar-sign"></i>
+                            <h3>Affordable Pricing</h3>
+                            <p>Get professional financial advice at transparent, affordable rates.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        
+
+        <!-- Login Page -->
+        <div id="login" class="page">
+            <div class="container">
+                <div class="form-container">
+                    <h2 class="text-center mb-2">Welcome Back</h2>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="loginEmail">Email Address</label>
+                            <input type="email" id="loginEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="userType">Login as</label>
+                            <select id="userType" required>
+                                <option value="">Select user type</option>
+                                <option value="client">Client</option>
+                                <option value="advisor">Financial Advisor</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+                    </form>
+                    <p class="text-center mt-2">
+                        Don't have an account? <a href="#" onclick="showPage('signup')">Sign up here</a>
+                    </p>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Signup Page -->
+        <div id="signup" class="page">
+            <div class="container">
+                <div class="form-container">
+                    <h2 class="text-center mb-2">Create Your Account</h2>
+                  <form id="signupForm" onsubmit="signup(event)">
+
+                        <div class="form-group">
+                            <label for="signupType">I want to join as</label>
+                            <select id="signupType" required onchange="toggleSignupFields()">
+                                <option value="">Select account type</option>
+                                <option value="client">Client</option>
+                                <option value="advisor">Financial Advisor</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupEmail">Email Address</label>
+                            <input type="email" id="signupEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPassword">Password</label>
+                            <input type="password" id="signupPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+
+                        <!-- Client-specific fields -->
+                        <div id="clientFields" class="hidden">
+                            <div class="form-group">
+                                <label for="age">Age</label>
+                                <input type="number" id="age" min="18" max="100">
+                            </div>
+                            <div class="form-group">
+                                <label for="incomeRange">Monthly Income Range</label>
+                                <select id="incomeRange">
+                                    <option value="">Select income range</option>
+                                    <option value="0-25000">₹0 - ₹25,000</option>
+                                    <option value="25000-50000">₹25,000 - ₹50,000</option>
+                                    <option value="50000-100000">₹50,000 - ₹1,00,000</option>
+                                    <option value="100000+">₹1,00,000+</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="financialGoals">Financial Goals</label>
+                                <textarea id="financialGoals" rows="3" placeholder="Describe your financial goals..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Advisor-specific fields -->
+                        <div id="advisorFields" class="hidden">
+                            <div class="form-group">
+                                <label for="experience">Years of Experience</label>
+                                <input type="number" id="experience" min="0" max="50">
+                            </div>
+                            <div class="form-group">
+                                <label for="specialization">Specialization</label>
+                                <select id="specialization">
+                                    <option value="">Select specialization</option>
+                                    <option value="investment">Investment Planning</option>
+                                    <option value="retirement">Retirement Planning</option>
+                                    <option value="tax">Tax Planning</option>
+                                    <option value="insurance">Insurance Planning</option>
+                                    <option value="debt">Debt Management</option>
+                                    <option value="business">Business Finance</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="certification">Certification</label>
+                                <input type="text" id="certification" placeholder="e.g., CFP, CFA, FRM">
+                            </div>
+                            <div class="form-group">
+                                <label for="hourlyRate">Hourly Rate (₹)</label>
+                                <input type="number" id="hourlyRate" min="500" max="10000">
+                            </div>
+                            <div class="form-group">
+                                <label for="bio">Professional Bio</label>
+                                <textarea id="bio" rows="4" placeholder="Tell clients about your expertise and approach..."></textarea>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+                    </form>
+                    <p class="text-center mt-2">
+                        Already have an account? <a href="#" onclick="showPage('login')">Login here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Client Dashboard -->
+        <div id="clientDashboard" class="page">
+            <div class="container">
+                <div class="dashboard">
+                    <div class="dashboard-header">
+                        <h2>Welcome back, <span id="clientName">John Doe</span>!</h2>
+                        <button class="btn btn-secondary" onclick="logout()">Logout</button>
+                    </div>
+                    
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <h3><i class="fas fa-calendar-alt"></i> Upcoming Appointments</h3>
+                            <div id="upcomingAppointments">
+                                <p><strong>Dr. Sarah Johnson</strong><br>
+                                Tomorrow, 2:00 PM<br>
+                                Investment Planning Session</p>
+                                <button class="btn btn-primary" onclick="startVideoCall()">Join Video Call</button>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <h3><i class="fas fa-comments"></i> Recent Messages</h3>
+                            <div id="recentMessages">
+                                <p><strong>Dr. Sarah Johnson:</strong> "I've prepared your investment portfolio analysis..."</p>
+                                <button class="btn btn-primary" onclick="openChat()">Open Chat</button>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <h3><i class="fas fa-file-alt"></i> Recommendations</h3>
+                            <div id="recommendations">
+                                <p>• Increase emergency fund to 6 months expenses</p>
+                                <p>• Consider SIP in equity mutual funds</p>
+                                <p>• Review insurance coverage</p>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <h3><i class="fas fa-search"></i> Find New Advisors</h3>
+                            <p>Explore our network of certified financial advisors</p>
+                            <button class="btn btn-primary" onclick="showPage('advisors')">Browse Advisors</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+async function signup(event) {
+    event.preventDefault();
+
+    // Collect form data
+    const type = document.getElementById("signupType").value;
+    const fullName = document.getElementById("fullName").value;
+    const email = document.getElementById("signupEmail").value;
+    const password = document.getElementById("signupPassword").value;
+    const phone = document.getElementById("phone").value;
+
+    // Client-specific fields
+    const age = document.getElementById("age")?.value || null;
+    const incomeRange = document.getElementById("incomeRange")?.value || null;
+    const financialGoals = document.getElementById("financialGoals")?.value || null;
+
+    // Send to backend
+    const res = await fetch("http://localhost:5000/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            type,
+            fullName,
+            email,
+            password,
+            phone,
+            age,
+            incomeRange,
+            financialGoals
+        })
+    });
+
+    const data = await res.json();
+    alert(data.message);
+
+    if (data.message === "Signup successful") {
+        showPage('login'); // redirect user to login page
+    }
+}
+</script>
+
+
+        <!-- Advisor Dashboard -->
+        <div id="advisorDashboard" class="page">
+            <div class="container">
+                <div class="dashboard">
+                    <div class="dashboard-header">
+                        <h2>Advisor Dashboard - <span id="advisorName">Dr. Karan Bhoyar</span></h2>
+                        <button class="btn btn-secondary" onclick="logout()">Logout</button>
+                    </div>
+                    
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <h3><i class="fas fa-calendar-check"></i> Appointment Requests</h3>
+                            <div id="appointmentRequests">
+                                <div style="border: 1px solid #e9ecef; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                                    <p><strong>John Doe</strong><br>
+                                    Requested: Tomorrow, 2:00 PM<br>
+                                    Topic: Investment Planning</p>
+                                    <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                                        <button class="btn btn-primary" onclick="acceptAppointment()">Accept</button>
+                                        <button class="btn btn-secondary" onclick="rejectAppointment()">Decline</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <h3><i class="fas fa-users"></i> Active Clients</h3>
+                            <div id="activeClients">
+                                <p>• John Doe - Investment Planning</p>
+                                <p>• Jane Smith - Retirement Planning</p>
+                                <p>• Mike Wilson - Debt Management</p>
+                                <button class="btn btn-primary" onclick="openChat()">Message Clients</button>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <h3><i class="fas fa-star"></i> Profile & Rating</h3>
+                            <div id="advisorProfile">
+                                <p><strong>Rating:</strong> ⭐⭐⭐⭐⭐ (4.8/5)</p>
+                                <p><strong>Completed Sessions:</strong> 127</p>
+                                <p><strong>Hourly Rate:</strong> ₹2,500</p>
+                                <button class="btn btn-primary" onclick="editProfile()">Edit Profile</button>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <h3><i class="fas fa-chart-line"></i> This Month</h3>
+                            <div id="monthlyStats">
+                                <p><strong>Sessions:</strong> 23</p>
+                                <p><strong>New Clients:</strong> 5</p>
+                                <p><strong>Earnings:</strong> ₹57,500</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Find Advisors Page -->
+        <div id="advisors" class="page">
+            <div class="container">
+                <h2 class="text-center mb-2" style="color: white;">Find Your Perfect Financial Advisor</h2>
+                
+                <div class="search-filters">
+                    <h3>Search & Filter</h3>
+                    <div class="form-group">
+                        <input type="text" id="advisorSearch" placeholder="Search by name or specialization..." style="width: 100%;">
+                    </div>
+                    <div class="filter-row">
+                        <div class="form-group">
+                            <label for="filterSpecialization">Specialization</label>
+                            <select id="filterSpecialization">
+                                <option value="">All Specializations</option>
+                                <option value="investment">Investment Planning</option>
+                                <option value="retirement">Retirement Planning</option>
+                                <option value="tax">Tax Planning</option>
+                                <option value="insurance">Insurance Planning</option>
+                                <option value="debt">Debt Management</option>
+                                <option value="business">Business Finance</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="filterRate">Max Hourly Rate</label>
+                            <select id="filterRate">
+                                <option value="">Any Rate</option>
+                                <option value="1000">Under ₹1,000</option>
+                                <option value="2000">Under ₹2,000</option>
+                                <option value="3000">Under ₹3,000</option>
+                                <option value="5000">Under ₹5,000</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="filterRating">Minimum Rating</label>
+                            <select id="filterRating">
+                                <option value="">Any Rating</option>
+                                <option value="4">4+ Stars</option>
+                                <option value="4.5">4.5+ Stars</option>
+                                <option value="4.8">4.8+ Stars</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="advisor-grid" id="advisorGrid">
+                    <!-- Advisor cards will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Resources Page -->
+        <div id="resources" class="page">
+            <div class="container">
+                <h2 class="text-center mb-2" style="color: white;">Financial Literacy Hub</h2>
+                <p class="text-center" style="color: white; opacity: 0.9;">Learn the fundamentals of personal finance and investment</p>
+                
+                <div class="article-grid" id="articlesGrid">
+                    <!-- Articles will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- About Page -->
+        <div id="about" class="page">
+            <div class="container">
+                <div class="features">
+                    <h2 class="text-center mb-2">About FinanceAdvisor</h2>
+                    <p class="text-center" style="font-size: 1.1rem; margin-bottom: 2rem;">
+                        We're on a mission to democratize financial advice and make professional financial guidance accessible to everyone.
+                    </p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-bullseye"></i>
+                            <h3>Our Mission</h3>
+                            <p>To bridge the gap between individuals seeking financial guidance and certified professionals, making quality financial advice affordable and accessible.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-eye"></i>
+                            <h3>Our Vision</h3>
+                            <p>A world where everyone has access to professional financial guidance, leading to better financial decisions and improved financial well-being.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-handshake"></i>
+                            <h3>Our Values</h3>
+                            <p>Transparency, trust, and empowerment. We believe in honest communication, secure transactions, and empowering individuals with financial knowledge.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Chat Modal -->
+    <div id="chatModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Chat with <span id="chatPartnerName">Dr. Karan Bhoyar</span></h3>
+                <button class="close-modal" onclick="closeChat()">&times;</button>
+            </div>
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message received">
+                        <p>Hello! I've reviewed your financial profile. Let's discuss your investment goals.</p>
+                        <small>2:30 PM</small>
+                    </div>
+                    <div class="message sent">
+                        <p>Thank you! I'm particularly interested in long-term investment options.</p>
+                        <small>2:32 PM</small>
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="messageInput" placeholder="Type your message...">
+                    <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Call Modal -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h3>Video Call with <span id="videoPartnerName">Dr. Karan Bhoyar</span></h3>
+                <button class="close-modal" onclick="endVideoCall()">&times;</button>
+            </div>
+            <div class="video-call">
+                <i class="fas fa-video" style="font-size: 4rem; margin-bottom: 1rem;"></i>
+                <p>Video call in progress...</p>
+                <p style="opacity: 0.7;">This is a demo interface. In a real implementation, this would show live video feeds.</p>
+                <div class="video-controls">
+                    <button class="video-btn mute" onclick="toggleMute()"><i class="fas fa-microphone-slash"></i></button>
+                    <button class="video-btn camera" onclick="toggleCamera()"><i class="fas fa-video"></i></button>
+                    <button class="video-btn end" onclick="endVideoCall()"><i class="fas fa-phone-slash"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Book Appointment</h3>
+                <button class="close-modal" onclick="closeBooking()">&times;</button>
+            </div>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label>Select Date & Time</label>
+                    <div class="calendar" id="bookingCalendar">
+                        <div class="calendar-header">
+                            <button type="button" onclick="previousMonth()">&lt;</button>
+                            <h4 id="currentMonth">December 2024</h4>
+                            <button type="button" onclick="nextMonth()">&gt;</button>
+                        </div>
+                        <div class="calendar-grid" id="calendarGrid">
+                            <!-- Calendar days will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="timeSlot">Available Time Slots</label>
+                    <select id="timeSlot" required>
+                        <option value="">Select a time</option>
+                        <option value="09:00">9:00 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="14:00">2:00 PM</option>
+                        <option value="15:00">3:00 PM</option>
+                        <option value="16:00">4:00 PM</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sessionType">Session Type</label>
+                    <select id="sessionType" required>
+                        <option value="">Select session type</option>
+                        <option value="consultation">Initial Consultation</option>
+                        <option value="planning">Financial Planning</option>
+                        <option value="review">Portfolio Review</option>
+                        <option value="followup">Follow-up Session</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sessionNotes">Additional Notes</label>
+                    <textarea id="sessionNotes" rows="3" placeholder="Describe what you'd like to discuss..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Proceed to Payment</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Payment</h3>
+                <button class="close-modal" onclick="closePayment()">&times;</button>
+            </div>
+            <div class="payment-options">
+                <div class="payment-option" onclick="selectPayment('card')">
+                    <i class="fas fa-credit-card"></i>
+                    <strong>Credit/Debit Card</strong>
+                    <p>Pay securely with your card</p>
+                </div>
+                <div class="payment-option" onclick="selectPayment('upi')">
+                    <i class="fas fa-mobile-alt"></i>
+                    <strong>UPI Payment</strong>
+                    <p>Pay using UPI apps</p>
+                </div>
+                <div class="payment-option" onclick="selectPayment('wallet')">
+                    <i class="fas fa-wallet"></i>
+                    <strong>Digital Wallet</strong>
+                    <p>Pay with digital wallets</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <p><strong>Session Fee:</strong> ₹2,500</p>
+                <p><strong>Platform Fee:</strong> ₹100</p>
+                <p><strong>Total:</strong> ₹2,600</p>
+            </div>
+            <button class="btn btn-primary" style="width: 100%;" onclick="processPayment()">Pay Now</button>
+        </div>
+    </div>
+
+    
+
+    <script>
+        // Global variables
+        let currentUser = null;
+        let currentUserType = null;
+        let selectedAdvisor = null;
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+
+        // Sample data
+        const advisors = [
+            {
+                id: 1,
+                name: "Dr. Karan Bhoyar",
+                specialization: "Investment Planning",
+                experience: 8,
+                rating: 4.9,
+                hourlyRate: 2500,
+                bio: "Specialized in long-term investment strategies and portfolio optimization. Helped over 200 clients achieve their financial goals.",
+                certification: "CFP, CFA"
+            },
+            {
+                id: 2,
+                name: "Mr. Rajesh Kumar",
+                specialization: "Retirement Planning",
+                experience: 12,
+                rating: 4.7,
+                hourlyRate: 3000,
+                bio: "Expert in retirement planning and pension management. 12+ years of experience in financial services.",
+                certification: "CFP, FRM"
+            },
+            {
+                id: 3,
+                name: "Ms. Priya Sharma",
+                specialization: "Tax Planning",
+                experience: 6,
+                rating: 4.8,
+                hourlyRate: 2000,
+                bio: "Tax optimization specialist helping individuals and businesses minimize tax liability legally.",
+                certification: "CA, CFP"
+            },
+            {
+                id: 4,
+                name: "Dr. Michael Chen",
+                specialization: "Business Finance",
+                experience: 15,
+                rating: 4.9,
+                hourlyRate: 4000,
+                bio: "Business finance expert with extensive experience in startup funding and corporate financial strategy.",
+                certification: "MBA, CFA"
+            },
+            {
+                id: 5,
+                name: "Ms. Anita Patel",
+                specialization: "Debt Management",
+                experience: 7,
+                rating: 4.6,
+                hourlyRate: 1800,
+                bio: "Debt restructuring and management specialist. Helped hundreds of clients become debt-free.",
+                certification: "CFP"
+            },
+            {
+                id: 6,
+                name: "Mr. David Wilson",
+                specialization: "Insurance Planning",
+                experience: 10,
+                rating: 4.8,
+                hourlyRate: 2200,
+                bio: "Insurance and risk management expert. Comprehensive coverage analysis and optimization.",
+                certification: "CLU, CFP"
+            }
+        ];
+
+        const articles = [
+            {
+                id: 1,
+                title: "Budgeting Basics: Your First Step to Financial Freedom",
+                category: "Budgeting",
+                icon: "fas fa-calculator",
+                excerpt: "Learn how to create and stick to a budget that works for your lifestyle and goals."
+            },
+            {
+                id: 2,
+                title: "Emergency Fund: Why You Need One and How to Build It",
+                category: "Savings",
+                icon: "fas fa-piggy-bank",
+                excerpt: "Discover the importance of emergency funds and practical strategies to build yours."
+            },
+            {
+                id: 3,
+                title: "Investment 101: Getting Started with Mutual Funds",
+                category: "Investment",
+                icon: "fas fa-chart-line",
+                excerpt: "A beginner's guide to mutual fund investing and building long-term wealth."
+            },
+            {
+                id: 4,
+                title: "Tax-Saving Investments Under Section 80C",
+                category: "Tax Planning",
+                icon: "fas fa-file-invoice-dollar",
+                excerpt: "Maximize your tax savings with smart investment choices under Section 80C."
+            },
+            {
+                id: 5,
+                title: "Retirement Planning: Start Early, Retire Comfortably",
+                category: "Retirement",
+                icon: "fas fa-umbrella-beach",
+                excerpt: "Learn why starting early is crucial for a comfortable retirement and how to plan."
+            },
+            {
+                id: 6,
+                title: "Insurance Essentials: Protecting Your Financial Future",
+                category: "Insurance",
+                icon: "fas fa-shield-alt",
+                excerpt: "Understanding different types of insurance and how much coverage you really need."
+            }
+        ];
+
+        // Page navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Load page-specific content
+            if (pageId === 'advisors') {
+                loadAdvisors();
+            } else if (pageId === 'resources') {
+                loadArticles();
+            }
+        }
+
+        function showSignup(type) {
+            showPage('signup');
+            document.getElementById('signupType').value = type;
+            toggleSignupFields();
+        }
+
+        // Form handling
+        function toggleSignupFields() {
+            const signupType = document.getElementById('signupType').value;
+            const clientFields = document.getElementById('clientFields');
+            const advisorFields = document.getElementById('advisorFields');
+            
+            if (signupType === 'client') {
+                clientFields.classList.remove('hidden');
+                advisorFields.classList.add('hidden');
+            } else if (signupType === 'advisor') {
+                clientFields.classList.add('hidden');
+                advisorFields.classList.remove('hidden');
+            } else {
+                clientFields.classList.add('hidden');
+                advisorFields.classList.add('hidden');
+            }
+        }
+
+        // Login form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const userType = document.getElementById('userType').value;
+            
+            // Demo login - in real app, this would validate against a backend
+            if (email && password && userType) {
+                currentUser = {
+                    email: email,
+                    name: userType === 'client' ? 'John Doe' : 'Dr. Sarah Johnson',
+                    type: userType
+                };
+                currentUserType = userType;
+                
+                // Show success message
+                showMessage('Login successful! Redirecting to dashboard...', 'success');
+                
+                // Redirect to appropriate dashboard
+                setTimeout(() => {
+                    if (userType === 'client') {
+                        document.getElementById('clientName').textContent = currentUser.name;
+                        showPage('clientDashboard');
+                    } else {
+                        document.getElementById('advisorName').textContent = currentUser.name;
+                        showPage('advisorDashboard');
+                    }
+                }, 1500);
+            }
+        });
+
+        // Signup form submission
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const signupType = document.getElementById('signupType').value;
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('signupEmail').value;
+            
+            // Demo signup - in real app, this would send data to backend
+            if (email && fullName && signupType) {
+                showMessage('Account created successfully! Please login to continue.', 'success');
+                
+                setTimeout(() => {
+                    showPage('login');
+                }, 2000);
+            }
+        });
+
+        // Load advisors
+        function loadAdvisors() {
+            const advisorGrid = document.getElementById('advisorGrid');
+            advisorGrid.innerHTML = '';
+            
+            advisors.forEach(advisor => {
+                const advisorCard = createAdvisorCard(advisor);
+                advisorGrid.appendChild(advisorCard);
+            });
+        }
+
+        function createAdvisorCard(advisor) {
+            const card = document.createElement('div');
+            card.className = 'advisor-card';
+            
+            const stars = '⭐'.repeat(Math.floor(advisor.rating));
+            
+            card.innerHTML = `
+                <div class="advisor-header">
+                    <div class="advisor-avatar">
+                        ${advisor.name.charAt(0)}
+                    </div>
+                    <div>
+                        <h3>${advisor.name}</h3>
+                        <p style="color: #667eea; font-weight: 600;">${advisor.specialization}</p>
+                        <div class="rating">${stars} ${advisor.rating}</div>
+                    </div>
+                </div>
+                <p style="margin: 1rem 0; color: #666;">${advisor.bio}</p>
+                <div style="margin: 1rem 0;">
+                    <p><strong>Experience:</strong> ${advisor.experience} years</p>
+                    <p><strong>Certification:</strong> ${advisor.certification}</p>
+                    <p><strong>Rate:</strong> ₹${advisor.hourlyRate}/hour</p>
+                </div>
+                <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                    <button class="btn btn-primary" onclick="bookAppointment(${advisor.id})" style="flex: 1;">Book Appointment</button>
+                    <button class="btn btn-secondary" onclick="viewProfile(${advisor.id})">View Profile</button>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Load articles
+        function loadArticles() {
+            const articlesGrid = document.getElementById('articlesGrid');
+            articlesGrid.innerHTML = '';
+            
+            articles.forEach(article => {
+                const articleCard = createArticleCard(article);
+                articlesGrid.appendChild(articleCard);
+            });
+        }
+
+        function createArticleCard(article) {
+            const card = document.createElement('div');
+            card.className = 'article-card';
+            
+            card.innerHTML = `
+                <div class="article-image">
+                    <i class="${article.icon}"></i>
+                </div>
+                <div class="article-content">
+                    <h3>${article.title}</h3>
+                    <p style="color: #667eea; font-weight: 600; margin: 0.5rem 0;">${article.category}</p>
+                    <p style="color: #666; margin-bottom: 1rem;">${article.excerpt}</p>
+                    <button class="btn btn-primary" onclick="readArticle(${article.id})">Read More</button>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Booking system
+        function bookAppointment(advisorId) {
+            selectedAdvisor = advisors.find(a => a.id === advisorId);
+            document.getElementById('bookingModal').classList.add('active');
+            generateCalendar();
+        }
+
+        function closeBooking() {
+            document.getElementById('bookingModal').classList.remove('active');
+        }
+
+        function generateCalendar() {
+            const calendarGrid = document.getElementById('calendarGrid');
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"];
+            
+            document.getElementById('currentMonth').textContent = `${monthNames[currentMonth]} ${currentYear}`;
+            
+            calendarGrid.innerHTML = '';
+            
+            // Add day headers
+            const dayHeaders = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            dayHeaders.forEach(day => {
+                const dayHeader = document.createElement('div');
+                dayHeader.className = 'calendar-day';
+                dayHeader.style.fontWeight = 'bold';
+                dayHeader.style.background = '#667eea';
+                dayHeader.style.color = 'white';
+                dayHeader.textContent = day;
+                calendarGrid.appendChild(dayHeader);
+            });
+            
+            // Get first day of month and number of days
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            
+            // Add empty cells for days before month starts
+            for (let i = 0; i < firstDay; i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.className = 'calendar-day';
+                emptyDay.style.opacity = '0.3';
+                calendarGrid.appendChild(emptyDay);
+            }
+            
+            // Add days of the month
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+                dayElement.onclick = () => selectDate(day);
+                calendarGrid.appendChild(dayElement);
+            }
+        }
+
+        function selectDate(day) {
+            // Remove previous selection
+            document.querySelectorAll('.calendar-day.selected').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add selection to clicked day
+            event.target.classList.add('selected');
+        }
+
+        function previousMonth() {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            generateCalendar();
+        }
+
+        function nextMonth() {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            generateCalendar();
+        }
+
+        // Booking form submission
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const selectedDate = document.querySelector('.calendar-day.selected');
+            const timeSlot = document.getElementById('timeSlot').value;
+            const sessionType = document.getElementById('sessionType').value;
+            
+            if (selectedDate && timeSlot && sessionType) {
+                closeBooking();
+                document.getElementById('paymentModal').classList.add('active');
+            } else {
+                showMessage('Please select a date, time, and session type.', 'error');
+            }
+        });
+
+        // Payment system
+        function selectPayment(method) {
+            // Remove previous selection
+            document.querySelectorAll('.payment-option.selected').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add selection to clicked option
+            event.target.classList.add('selected');
+        }
+
+        function processPayment() {
+            const selectedPayment = document.querySelector('.payment-option.selected');
+            
+            if (selectedPayment) {
+                showMessage('Payment processed successfully! Appointment booked.', 'success');
+                closePayment();
+                
+                // In a real app, this would update the user's dashboard
+                setTimeout(() => {
+                    if (currentUserType === 'client') {
+                        showPage('clientDashboard');
+                    }
+                }, 2000);
+            } else {
+                showMessage('Please select a payment method.', 'error');
+            }
+        }
+
+        function closePayment() {
+            document.getElementById('paymentModal').classList.remove('active');
+        }
+
+        // Chat system
+        function openChat() {
+            document.getElementById('chatModal').classList.add('active');
+        }
+
+        function closeChat() {
+            document.getElementById('chatModal').classList.remove('active');
+        }
+
+        function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value.trim();
+            
+            if (message) {
+                const chatMessages = document.getElementById('chatMessages');
+                const messageElement = document.createElement('div');
+                messageElement.className = 'message sent';
+                messageElement.innerHTML = `
+                    <p>${message}</p>
+                    <small>${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</small>
+                `;
+                
+                chatMessages.appendChild(messageElement);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                messageInput.value = '';
+                
+                // Simulate response (in real app, this would be real-time)
+                setTimeout(() => {
+                    const responseElement = document.createElement('div');
+                    responseElement.className = 'message received';
+                    responseElement.innerHTML = `
+                        <p>Thank you for your message. I'll review this and get back to you shortly.</p>
+                        <small>${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</small>
+                    `;
+                    chatMessages.appendChild(responseElement);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 1000);
+            }
+        }
+
+        // Video call system
+        function startVideoCall() {
+            document.getElementById('videoModal').classList.add('active');
+        }
+
+        function endVideoCall() {
+            document.getElementById('videoModal').classList.remove('active');
+        }
+
+        function toggleMute() {
+            const btn = event.target.closest('.video-btn');
+            const icon = btn.querySelector('i');
+            
+            if (icon.classList.contains('fa-microphone-slash')) {
+                icon.className = 'fas fa-microphone';
+                btn.style.background = '#28a745';
+            } else {
+                icon.className = 'fas fa-microphone-slash';
+                btn.style.background = '#dc3545';
+            }
+        }
+
+        function toggleCamera() {
+            const btn = event.target.closest('.video-btn');
+            const icon = btn.querySelector('i');
+            
+            if (icon.classList.contains('fa-video')) {
+                icon.className = 'fas fa-video-slash';
+                btn.style.background = '#dc3545';
+            } else {
+                icon.className = 'fas fa-video';
+                btn.style.background = '#28a745';
+            }
+        }
+
+        // Advisor dashboard functions
+        function acceptAppointment() {
+            showMessage('Appointment accepted! Client has been notified.', 'success');
+            event.target.closest('div').innerHTML = '<p style="color: #28a745; font-weight: 600;">✓ Accepted</p>';
+        }
+
+        function rejectAppointment() {
+            showMessage('Appointment declined. Client has been notified.', 'success');
+            event.target.closest('div').innerHTML = '<p style="color: #dc3545; font-weight: 600;">✗ Declined</p>';
+        }
+
+        function editProfile() {
+            showMessage('Profile editing feature would open here in a full implementation.', 'success');
+        }
+
+        // Utility functions
+        function showMessage(message, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = type === 'success' ? 'success-message' : 'error-message';
+            messageDiv.textContent = message;
+            
+            // Insert at the top of the current page
+            const currentPage = document.querySelector('.page.active');
+            const container = currentPage.querySelector('.container');
+            container.insertBefore(messageDiv, container.firstChild);
+            
+            // Remove message after 5 seconds
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 5000);
+        }
+
+        function logout() {
+            currentUser = null;
+            currentUserType = null;
+            showMessage('Logged out successfully!', 'success');
+            setTimeout(() => {
+                showPage('home');
+            }, 1500);
+        }
+
+        function viewProfile(advisorId) {
+            const advisor = advisors.find(a => a.id === advisorId);
+            showMessage(`Viewing profile for ${advisor.name}. Full profile view would open here.`, 'success');
+        }
+
+        function readArticle(articleId) {
+            const article = articles.find(a => a.id === articleId);
+            showMessage(`Opening article: "${article.title}". Full article would open here.`, 'success');
+        }
+
+        
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load initial content
+            loadAdvisors();
+            loadArticles();
+            
+            // Set up search functionality
+            document.getElementById('advisorSearch').addEventListener('input', filterAdvisors);
+            document.getElementById('filterSpecialization').addEventListener('change', filterAdvisors);
+            document.getElementById('filterRate').addEventListener('change', filterAdvisors);
+            document.getElementById('filterRating').addEventListener('change', filterAdvisors);
+            
+            // Set up message input enter key
+            document.getElementById('messageInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+        });
+
+        // Filter advisors
+        function filterAdvisors() {
+            const searchTerm = document.getElementById('advisorSearch').value.toLowerCase();
+            const specializationFilter = document.getElementById('filterSpecialization').value;
+            const rateFilter = document.getElementById('filterRate').value;
+            const ratingFilter = document.getElementById('filterRating').value;
+            
+            const filteredAdvisors = advisors.filter(advisor => {
+                const matchesSearch = advisor.name.toLowerCase().includes(searchTerm) || 
+                                    advisor.specialization.toLowerCase().includes(searchTerm);
+                const matchesSpecialization = !specializationFilter || advisor.specialization.toLowerCase().includes(specializationFilter);
+                const matchesRate = !rateFilter || advisor.hourlyRate <= parseInt(rateFilter);
+                const matchesRating = !ratingFilter || advisor.rating >= parseFloat(ratingFilter);
+                
+                return matchesSearch && matchesSpecialization && matchesRate && matchesRating;
+            });
+            
+            const advisorGrid = document.getElementById('advisorGrid');
+            advisorGrid.innerHTML = '';
+            
+            if (filteredAdvisors.length === 0) {
+                advisorGrid.innerHTML = '<p style="text-align: center; color: white; grid-column: 1 / -1;">No advisors found matching your criteria.</p>';
+            } else {
+                filteredAdvisors.forEach(advisor => {
+                    const advisorCard = createAdvisorCard(advisor);
+                    advisorGrid.appendChild(advisorCard);
+                });
+            }
+        }
+
+
+        // Handle Signup Form
+document.getElementById("signupForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const fullName = document.getElementById("fullName").value;
+  const email = document.getElementById("signupEmail").value;
+  const password = document.getElementById("signupPassword").value;
+  const phone = document.getElementById("phone").value;
+  const userType = document.getElementById("signupType").value;
+
+  const res = await fetch("http://localhost:5000/api/auth/signup", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ fullName, email, password, phone, userType })
+  });
+
+  const data = await res.json();
+  alert(data.msg);
+});
+
+// Handle Login Form
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+  const userType = document.getElementById("userType").value;
+
+  const res = await fetch("http://localhost:5000/api/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password, userType })
+  });
+
+  const data = await res.json();
+  alert(data.msg);
+
+  
+  
+});
+
+
+
+
+
+
+
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97d3eb0272fdc1c2',t:'MTc1NzU1OTY2MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+
+<!-- Footer -->
+<footer style="background-color:#222; color:#fff; text-align:center; padding:20px 0; width:100%;">
+    <div>
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/yourusername" target="_blank" style="margin:0 10px;">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" style="width:30px; height:30px;">
+        </a>
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/yourusername" target="_blank" style="margin:0 10px;">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" style="width:30px; height:30px;">
+        </a>
+        <!-- Twitter -->
+        <a href="https://twitter.com/yourusername" target="_blank" style="margin:0 10px;">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" style="width:30px; height:30px;">
+        </a>
+    </div>
+    <div style="margin-top:10px; font-size:14px;">
+        &copy; 2025 Your Company Name. All Rights Reserved.
+    </div>
+</footer>
+
+</body>
+</html>
